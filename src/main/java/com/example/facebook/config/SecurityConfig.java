@@ -1,19 +1,20 @@
 package com.example.facebook.config;
 
-import com.kpjunaid.common.AppConstants;
-import com.kpjunaid.common.CustomAccessDeniedHandler;
-import com.kpjunaid.common.CustomAuthenticationEntryPoint;
-import com.kpjunaid.filter.JwtAuthorizationFilter;
-import com.kpjunaid.service.impl.CustomUserDetailService;
+
+import com.example.facebook.common.AppConstants;
+import com.example.facebook.common.CustomAccessDeniedHandler;
+import com.example.facebook.common.CustomAuthenticationEntryPoint;
+import com.example.facebook.filter.JwtAuthorizationFilter;
+import com.example.facebook.service.impl.CustomUserDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -37,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailService).passwordEncoder(passwordEncoder());
     }
 
-    @Override
+
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
@@ -55,9 +56,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
-    @Override @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
     }
 
     @Bean
@@ -76,4 +77,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
+
 }
