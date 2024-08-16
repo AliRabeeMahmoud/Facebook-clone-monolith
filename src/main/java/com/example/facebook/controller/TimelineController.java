@@ -1,9 +1,10 @@
 package com.example.facebook.controller;
 
-import com.kpjunaid.entity.Tag;
-import com.kpjunaid.response.PostResponse;
-import com.kpjunaid.service.PostService;
-import com.kpjunaid.service.TagService;
+
+import com.example.facebook.entity.Tag;
+import com.example.facebook.response.PostResponse;
+import com.example.facebook.service.PostService;
+import com.example.facebook.service.TagService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

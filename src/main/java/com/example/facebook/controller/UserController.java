@@ -1,14 +1,16 @@
 package com.example.facebook.controller;
 
-import com.kpjunaid.common.AppConstants;
-import com.kpjunaid.common.UserPrincipal;
-import com.kpjunaid.dto.*;
-import com.kpjunaid.entity.User;
-import com.kpjunaid.response.PostResponse;
-import com.kpjunaid.response.UserResponse;
-import com.kpjunaid.service.PostService;
-import com.kpjunaid.service.UserService;
-import com.kpjunaid.service.impl.JwtTokenService;
+
+import com.example.facebook.common.AppConstants;
+import com.example.facebook.common.UserPrincipal;
+import com.example.facebook.dto.*;
+import com.example.facebook.entity.User;
+import com.example.facebook.response.PostResponse;
+import com.example.facebook.response.UserResponse;
+import com.example.facebook.service.PostService;
+import com.example.facebook.service.UserService;
+import com.example.facebook.service.impl.JwtTokenService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,7 +21,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController

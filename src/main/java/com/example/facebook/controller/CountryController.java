@@ -1,7 +1,8 @@
 package com.example.facebook.controller;
 
-import com.kpjunaid.entity.Country;
-import com.kpjunaid.service.CountryService;
+
+import com.example.facebook.entity.Country;
+import com.example.facebook.service.CountryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
