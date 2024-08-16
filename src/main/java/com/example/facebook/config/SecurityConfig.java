@@ -47,14 +47,15 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         req->req.requestMatchers(AppConstants.PUBLIC_URLS).permitAll()
                                 .anyRequest().authenticated()
-                )
+                                        )
                 .userDetailsService(userDetailService)
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
+
                 .exceptionHandling(
                         e->e.accessDeniedHandler(accessDeniedHandler)
                                 .authenticationEntryPoint(authenticationEntryPoint)
                                     )
+                .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
 
                 .build();
 
