@@ -35,7 +35,7 @@ public class PostController {
     private final TagService tagService;
 
     @PostMapping("/posts/create")
-    public ResponseEntity<?> createNewPost(@RequestParam(value = "content", required = false) Optional<String> content,
+    public ResponseEntity<Post> createNewPost(@RequestParam(value = "content", required = false) Optional<String> content,
                                            @RequestParam(name = "postPhoto", required = false) Optional<MultipartFile> postPhoto,
                                            @RequestParam(name = "postTags", required = false) Optional<String> postTags) throws JsonProcessingException {
         if ((content.isEmpty() || content.get().length() <= 0) &&
@@ -54,8 +54,8 @@ public class PostController {
         return new ResponseEntity<>(createdPost, HttpStatus.CREATED);
     }
 
-    @PostMapping("/posts/{postId}/update")
-    public ResponseEntity<?> updatePost(@PathVariable("postId") Long postId,
+    @PutMapping("/posts/{postId}/update")
+    public ResponseEntity<Post> updatePost(@PathVariable("postId") Long postId,
                                         @RequestParam(value = "content", required = false) Optional<String> content,
                                         @RequestParam(name = "postPhoto", required = false) Optional<MultipartFile> postPhoto,
                                         @RequestParam(name = "postTags", required = false) Optional<String> postTags) throws JsonProcessingException {
@@ -75,26 +75,26 @@ public class PostController {
         return new ResponseEntity<>(updatePost, HttpStatus.OK);
     }
 
-    @PostMapping("/posts/{postId}/delete")
-    public ResponseEntity<?> deletePost(@PathVariable("postId") Long postId) {
+    @DeleteMapping("/posts/{postId}/delete")
+    @ResponseStatus(HttpStatus.OK)
+    public void deletePost(@PathVariable("postId") Long postId) {
         postService.deletePost(postId);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/posts/{postId}/photo/delete")
-    public ResponseEntity<?> deletePostPhoto(@PathVariable("postId") Long postId) {
+    @DeleteMapping("/posts/{postId}/photo/delete")
+    @ResponseStatus(HttpStatus.OK)
+    public void deletePostPhoto(@PathVariable("postId") Long postId) {
         postService.deletePostPhoto(postId);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/posts/{postId}")
-    public ResponseEntity<?> getPostById(@PathVariable("postId") Long postId) {
+    public ResponseEntity<PostResponse> getPostById(@PathVariable("postId") Long postId) {
         PostResponse foundPostResponse = postService.getPostResponseById(postId);
         return new ResponseEntity<>(foundPostResponse, HttpStatus.OK);
     }
 
     @GetMapping("/posts/{postId}/likes")
-    public ResponseEntity<?> getPostLikes(@PathVariable("postId") Long postId,
+    public ResponseEntity<List<User>> getPostLikes(@PathVariable("postId") Long postId,
                                           @RequestParam("page") Integer page,
                                           @RequestParam("size") Integer size) {
         page = page < 0 ? 0 : page-1;
