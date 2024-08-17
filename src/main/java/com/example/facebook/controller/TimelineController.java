@@ -23,7 +23,7 @@ public class TimelineController {
     private final TagService tagService;
 
     @GetMapping( "/")
-    public ResponseEntity<?> getTimelinePosts(@RequestParam("page") Integer page,
+    public ResponseEntity<List<PostResponse>> getTimelinePosts(@RequestParam("page") Integer page,
                                               @RequestParam("size") Integer size) {
         page = page < 0 ? 0 : page-1;
         size = size <= 0 ? 5 : size;
@@ -32,7 +32,7 @@ public class TimelineController {
     }
 
     @GetMapping( "/tags")
-    public ResponseEntity<?> getTimelineTags() {
+    public ResponseEntity<List<Tag>> getTimelineTags() {
         List<Tag> timelineTags = tagService.getTimelineTags();
         return new ResponseEntity<>(timelineTags, HttpStatus.OK);
     }

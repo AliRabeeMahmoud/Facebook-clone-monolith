@@ -19,7 +19,7 @@ public class CountryController {
     private final CountryService countryService;
 
     @GetMapping("/countries")
-    public ResponseEntity<?> getCountryList() {
+    public ResponseEntity<List<Country>> getCountryList() {
         List<Country> countryList = countryService.getCountryList();
         return new ResponseEntity<>(countryList, HttpStatus.OK);
     }

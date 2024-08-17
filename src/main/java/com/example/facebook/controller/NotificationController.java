@@ -17,7 +17,7 @@ public class NotificationController {
     private final NotificationService notificationService;
 
     @GetMapping("/notifications")
-    public ResponseEntity<?> getNotifications(@RequestParam("page") Integer page,
+    public ResponseEntity<List<Notification>> getNotifications(@RequestParam("page") Integer page,
                                               @RequestParam("size") Integer size) {
         page = page < 0 ? 0 : page-1;
         size = size <= 0 ? 5 : size;
@@ -26,14 +26,14 @@ public class NotificationController {
     }
 
     @PostMapping("/notifications/mark-seen")
-    public ResponseEntity<?> markAllSeen() {
+    @ResponseStatus(HttpStatus.OK)
+    public void markAllSeen() {
         notificationService.markAllSeen();
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/notifications/mark-read")
-    public ResponseEntity<?> markAllRead() {
+    @ResponseStatus(HttpStatus.OK)
+    public void markAllRead() {
         notificationService.markAllRead();
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
