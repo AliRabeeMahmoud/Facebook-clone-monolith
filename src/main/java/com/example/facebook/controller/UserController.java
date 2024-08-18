@@ -33,13 +33,13 @@ public class UserController {
     private final AuthenticationManager authenticationManager;
 
     @PostMapping("/signup")
-    public ResponseEntity<?> signup(@RequestBody @Valid SignupDto signupDto) {
+    public ResponseEntity<User> signup(@RequestBody @Valid SignupDto signupDto) {
         User savedUser = userService.createNewUser(signupDto);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody @Valid LoginDto loginDto) {
+    public ResponseEntity<User> login(@RequestBody @Valid LoginDto loginDto) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginDto.getEmail(), loginDto.getPassword())
         );
@@ -51,61 +51,61 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public ResponseEntity<?> showUserProfile(Authentication authentication) {
+    public ResponseEntity<User> showUserProfile(Authentication authentication) {
         User user = userService.getUserByEmail(authentication.getPrincipal().toString());
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @PostMapping("/account/update/info")
-    public ResponseEntity<?> updateUserInfo(@RequestBody @Valid UpdateUserInfoDto updateUserInfoDto) {
+    @PutMapping("/account/update/info")
+    public ResponseEntity<User> updateUserInfo(@RequestBody @Valid UpdateUserInfoDto updateUserInfoDto) {
         User updatedUser = userService.updateUserInfo(updateUserInfoDto);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 
-    @PostMapping("/account/update/email")
-    public ResponseEntity<?> updateUserEmail(@RequestBody @Valid UpdateEmailDto updateEmailDto) {
+    @PutMapping("/account/update/email")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateUserEmail(@RequestBody @Valid UpdateEmailDto updateEmailDto) {
         userService.updateEmail(updateEmailDto);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/account/update/password")
-    public ResponseEntity<?> updateUserPassword(@RequestBody @Valid UpdatePasswordDto updatePasswordDto) {
+    @PutMapping("/account/update/password")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateUserPassword(@RequestBody @Valid UpdatePasswordDto updatePasswordDto) {
         userService.updatePassword(updatePasswordDto);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/account/update/profile-photo")
-    public ResponseEntity<?> updateProfilePhoto(@RequestParam("profilePhoto") MultipartFile profilePhoto) {
+    @PutMapping("/account/update/profile-photo")
+    public ResponseEntity<User> updateProfilePhoto(@RequestParam("profilePhoto") MultipartFile profilePhoto) {
         User updatedUser = userService.updateProfilePhoto(profilePhoto);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 
-    @PostMapping("/account/update/cover-photo")
-    public ResponseEntity<?> updateCoverPhoto(@RequestParam("coverPhoto") MultipartFile coverPhoto) {
+    @PutMapping("/account/update/cover-photo")
+    public ResponseEntity<User> updateCoverPhoto(@RequestParam("coverPhoto") MultipartFile coverPhoto) {
         User updatedUser = userService.updateCoverPhoto(coverPhoto);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 
-    @PostMapping("/account/delete")
-    public ResponseEntity<?> deleteUserAccount() {
+    @DeleteMapping("/account/delete")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteUserAccount() {
         userService.deleteUserAccount();
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/account/follow/{userId}")
-    public ResponseEntity<?> followUser(@PathVariable("userId") Long userId) {
+    @ResponseStatus(HttpStatus.OK)
+    public void followUser(@PathVariable("userId") Long userId) {
         userService.followUser(userId);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/account/unfollow/{userId}")
-    public ResponseEntity<?> unfollowUser(@PathVariable("userId") Long userId) {
+    @ResponseStatus(HttpStatus.OK)
+    public void unfollowUser(@PathVariable("userId") Long userId) {
         userService.unfollowUser(userId);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/users/{userId}/following")
-    public ResponseEntity<?> getUserFollowingUsers(@PathVariable("userId") Long userId,
+    public ResponseEntity<List<UserResponse>> getUserFollowingUsers(@PathVariable("userId") Long userId,
                                                   @RequestParam("page") Integer page,
                                                   @RequestParam("size") Integer size) {
         page = page < 0 ? 0 : page-1;
@@ -115,7 +115,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{userId}/follower")
-    public ResponseEntity<?> getUserFollowerUsers(@PathVariable("userId") Long userId,
+    public ResponseEntity<List<UserResponse>> getUserFollowerUsers(@PathVariable("userId") Long userId,
                                                  @RequestParam("page") Integer page,
                                                  @RequestParam("size") Integer size) {
         page = page < 0 ? 0 : page-1;
@@ -125,7 +125,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{userId}")
-    public ResponseEntity<?> getUserById(@PathVariable("userId") Long userId) {
+    public ResponseEntity<UserResponse> getUserById(@PathVariable("userId") Long userId) {
         User authUser = userService.getAuthenticatedUser();
         User targetUser = userService.getUserById(userId);
         UserResponse userResponse = UserResponse.builder()
@@ -136,7 +136,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{userId}/posts")
-    public ResponseEntity<?> getUserPosts(@PathVariable("userId") Long userId,
+    public ResponseEntity<List<PostResponse>> getUserPosts(@PathVariable("userId") Long userId,
                                           @RequestParam("page") Integer page,
                                           @RequestParam("size") Integer size) {
         page = page < 0 ? 0 : page-1;
@@ -147,7 +147,7 @@ public class UserController {
     }
 
     @GetMapping("/users/search")
-    public ResponseEntity<?> searchUser(@RequestParam("key") String key,
+    public ResponseEntity<List<UserResponse>> searchUser(@RequestParam("key") String key,
                                         @RequestParam("page") Integer page,
                                         @RequestParam("size") Integer size) {
         page = page < 0 ? 0 : page-1;
@@ -157,21 +157,21 @@ public class UserController {
     }
 
     @PostMapping("/verify-email/{token}")
-    public ResponseEntity<?> verifyEmail(@PathVariable("token") String token) {
+    @ResponseStatus(HttpStatus.OK)
+    public void verifyEmail(@PathVariable("token") String token) {
         userService.verifyEmail(token);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/forgot-password")
-    public ResponseEntity<?> forgotPassword(@RequestParam("email") String email) {
+    @ResponseStatus(HttpStatus.OK)
+    public void forgotPassword(@RequestParam("email") String email) {
         userService.forgotPassword(email);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/reset-password/{token}")
-    public ResponseEntity<?> resetPassword(@RequestBody @Valid ResetPasswordDto resetPasswordDto,
+    @ResponseStatus(HttpStatus.OK)
+    public void resetPassword(@RequestBody @Valid ResetPasswordDto resetPasswordDto,
                                            @PathVariable("token") String token) {
         userService.resetPassword(token, resetPasswordDto);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
