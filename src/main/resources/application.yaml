@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: facebook
+  datasource:
+    url: jdbc:mysql://localhost:3306/face
+    username: root
+    password: ali45
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ali.bn.rabee@gmail.com
+    password:
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+            required: true
+          auth: true
+          from: noreply@sapp.com
+        transport:
+          protocol: smtp
+    default-encoding: UTF-8
+    test-connection: false
+
+app:
+  root:
+    backend: http://localhost:8080
+
+upload:
+  user:
+    images: uploads/user
+  post:
+    images: uploads/post
+
+jwt:
+  secret: 'some-secret-key'
+
+logging:
+  file:
+    name: log/log.log
