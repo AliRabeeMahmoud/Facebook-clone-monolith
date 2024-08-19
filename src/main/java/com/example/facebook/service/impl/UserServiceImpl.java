@@ -23,6 +23,7 @@ import com.example.facebook.util.FileNamingUtil;
 import com.example.facebook.util.FileUploadUtil;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -41,6 +42,7 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 @RequiredArgsConstructor
+@Slf4j
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final CountryService countryService;
@@ -87,9 +89,11 @@ public class UserServiceImpl implements UserService {
                 throw new EmailExistsException();
             }
         } catch (UserNotFoundException e) {
+            log.info("in service, creating new user");
             User newUser = new User();
             newUser.setEmail(signupDto.getEmail());
             newUser.setPassword(passwordEncoder.encode(signupDto.getPassword()));
+            log.info("passed the encoding safely");
             newUser.setFirstName(signupDto.getFirstName());
             newUser.setLastName(signupDto.getLastName());
             newUser.setFollowerCount(0);
@@ -102,6 +106,7 @@ public class UserServiceImpl implements UserService {
             newUser.setRole(Role.ROLE_USER.name());
             User savedUser = userRepository.save(newUser);
             UserPrincipal userPrincipal = new UserPrincipal(savedUser);
+            log.info("token generated safely");
             emailService.send(savedUser.getEmail(), AppConstants.VERIFY_EMAIL, jwtTokenService.generateToken(userPrincipal));
             return savedUser;
         }

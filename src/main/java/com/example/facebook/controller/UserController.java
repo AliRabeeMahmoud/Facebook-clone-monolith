@@ -12,6 +12,7 @@ import com.example.facebook.service.UserService;
 import com.example.facebook.service.impl.JwtTokenService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
+@Slf4j
 public class UserController {
     private final UserService userService;
     private final PostService postService;
@@ -34,6 +36,7 @@ public class UserController {
 
     @PostMapping("/signup")
     public ResponseEntity<User> signup(@RequestBody @Valid SignupDto signupDto) {
+        log.info("in user signup controller");
         User savedUser = userService.createNewUser(signupDto);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }

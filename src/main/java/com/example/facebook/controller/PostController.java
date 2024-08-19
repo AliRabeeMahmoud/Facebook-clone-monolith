@@ -17,6 +17,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
+@Slf4j
 public class PostController {
     private final PostService postService;
     private final CommentService commentService;
@@ -49,6 +51,7 @@ public class PostController {
         MultipartFile postPhotoToAdd = postPhoto.isEmpty() ? null : postPhoto.get();
         List<TagDto> postTagsToAdd = postTags.isEmpty() ? null :
                 mapper.readValue(postTags.get(), new TypeReference<>() {});
+        log.info("json parse is safe");
 
         Post createdPost = postService.createNewPost(contentToAdd, postPhotoToAdd, postTagsToAdd);
         return new ResponseEntity<>(createdPost, HttpStatus.CREATED);

@@ -14,22 +14,24 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
 public class JwtTokenService {
-    @Value("jwt.secret")
+    @Value("${jwt.secret}")
     private String jwtSecret;
 
     public String generateToken(UserPrincipal userPrincipal) {
-        String[] claims = getClaimsFromUser(userPrincipal);
+        Map<String, Object> claims = new HashMap<>();
+        claims.put(AppConstants.AUTHORITIES, userPrincipal.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList()));
         return
         Jwts.builder()
                 .subject(userPrincipal.getUsername())
+                .claims(claims)
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + AppConstants.JWT_EXPIRATION_2Wk ))
                 .signWith(getSigninKey())
@@ -84,11 +86,7 @@ public class JwtTokenService {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    private String[] getClaimsFromUser(UserPrincipal userPrincipal) {
-        List<String> authorities = new ArrayList<>();
-        userPrincipal.getAuthorities().forEach(authority -> authorities.add(authority.getAuthority()));
-        return authorities.toArray(new String[0]);
-    }
+
 
     private SecretKey getSigninKey() {
         byte[] keyBytes = Decoders.BASE64URL.decode(jwtSecret);

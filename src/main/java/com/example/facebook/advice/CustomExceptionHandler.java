@@ -111,16 +111,6 @@ public class CustomExceptionHandler {
         return buildErrorResponse(HttpStatus.BAD_REQUEST, AppConstants.ACCOUNT_DISABLED, null);
     }
 
-//    @ExceptionHandler(TokenExpiredException.class)
-//    public ResponseEntity<ErrorResponse> handleTokenExpiredException(TokenExpiredException e) {
-//        return buildErrorResponse(HttpStatus.UNAUTHORIZED, AppConstants.INVALID_TOKEN, null);
-//    }
-//
-//    @ExceptionHandler(SignatureVerificationException.class)
-//    public ResponseEntity<ErrorResponse> handleInvalidTokenException(SignatureVerificationException e) {
-//        return buildErrorResponse(HttpStatus.UNAUTHORIZED, AppConstants.INVALID_TOKEN, null);
-//    }
-
     @ExceptionHandler(AuthenticationServiceException.class)
     public ResponseEntity<ErrorResponse> handleInvalidTokenException(AuthenticationServiceException e) {
         return buildErrorResponse(HttpStatus.BAD_REQUEST, AppConstants.INCORRECT_CREDENTIALS, null);
