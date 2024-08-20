@@ -12,7 +12,6 @@ import com.example.facebook.exception.EmailExistsException;
 import com.example.facebook.exception.InvalidOperationException;
 import com.example.facebook.exception.SameEmailUpdateException;
 import com.example.facebook.exception.UserNotFoundException;
-import com.example.facebook.mapper.MapStructMapper;
 import com.example.facebook.mapper.MapstructMapperUpdate;
 import com.example.facebook.repository.UserRepository;
 import com.example.facebook.response.UserResponse;
@@ -49,7 +48,7 @@ public class UserServiceImpl implements UserService {
     private final EmailService emailService;
     private final JwtTokenService jwtTokenService;
     private final PasswordEncoder passwordEncoder;
-    private final MapStructMapper mapStructMapper;
+//    private final MapStructMapper mapStructMapper;
     private final MapstructMapperUpdate mapstructMapperUpdate;
     private final Environment environment;
     private final FileNamingUtil fileNamingUtil;

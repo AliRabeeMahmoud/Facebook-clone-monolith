@@ -1,0 +1,48 @@
+
+### No need to configure DB because the annotation: @DataJpaTest contains @AutoConfigurTestDatabase
+### which will automatically configure an In-memory database for you
+
+spring:
+#  datasource:
+#    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+#    username: sa
+#    password: password
+#    driver-class-name: org.h2.Driver
+#  jpa:
+#    database-platform: org.hibernate.dialect.H2Dialect
+#    hibernate:
+#      ddl-auto: create-drop
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ali.bn.rabee@gmail.com
+    password: sdnt hnwq xdxu adjd
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+            required: true
+          auth: true
+          from: noreply@sapp.com
+        transport:
+          protocol: smtp
+    default-encoding: UTF-8
+    test-connection: false
+
+  sql:
+    init:
+      mode: never
+app:
+  root:
+    backend: http://localhost:8080
+
+upload:
+  user:
+    images: uploads/user
+  post:
+    images: uploads/post
+
+jwt:
+  secret: d16baa1b9e8bee8cd146d5d733fdb58ad7a2d21b1fa2022e387415c03c6b5ee4
+
