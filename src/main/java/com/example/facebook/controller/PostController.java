@@ -57,7 +57,7 @@ public class PostController {
         return new ResponseEntity<>(createdPost, HttpStatus.CREATED);
     }
 
-    @PutMapping("/posts/{postId}/update")
+    @PostMapping("/posts/{postId}/update")
     public ResponseEntity<Post> updatePost(@PathVariable("postId") Long postId,
                                         @RequestParam(value = "content", required = false) Optional<String> content,
                                         @RequestParam(name = "postPhoto", required = false) Optional<MultipartFile> postPhoto,

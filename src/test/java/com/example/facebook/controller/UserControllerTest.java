@@ -118,7 +118,7 @@ class UserControllerTest {
     }
 
     @Test
-    @WithMockAuthUser
+    @WithMockAuthUser  // used with methods that needs a logged in user
     void shouldReturnUserProfile_whenUserIdIsGiven() throws Exception {
         when(userService.getUserByEmail(anyString())).thenReturn(USER_JOHN);
         mockMvc.perform(get(API_URL_PREFIX + "/profile"))
