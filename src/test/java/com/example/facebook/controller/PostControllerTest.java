@@ -1,23 +1,25 @@
 package com.example.facebook.controller;
 
-import com.kpjunaid.dto.TagDto;
-import com.kpjunaid.entity.Comment;
-import com.kpjunaid.entity.Post;
-import com.kpjunaid.entity.Tag;
-import com.kpjunaid.entity.User;
-import com.kpjunaid.response.CommentResponse;
-import com.kpjunaid.response.PostResponse;
-import com.kpjunaid.service.CommentService;
-import com.kpjunaid.service.PostService;
-import com.kpjunaid.service.TagService;
-import com.kpjunaid.service.UserService;
-import com.kpjunaid.shared.MockResource;
-import com.kpjunaid.shared.WithMockAuthUser;
+
+import com.example.facebook.dto.TagDto;
+import com.example.facebook.entity.Comment;
+import com.example.facebook.entity.Post;
+import com.example.facebook.entity.Tag;
+import com.example.facebook.entity.User;
+import com.example.facebook.response.CommentResponse;
+import com.example.facebook.response.PostResponse;
+import com.example.facebook.service.CommentService;
+import com.example.facebook.service.PostService;
+import com.example.facebook.service.TagService;
+import com.example.facebook.service.UserService;
+import com.example.facebook.shared.MockResource;
+import com.example.facebook.shared.WithMockAuthUser;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mock.web.MockMultipartFile;
@@ -28,11 +30,9 @@ import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 @SpringBootTest
 @AutoConfigureMockMvc
 class PostControllerTest {

@@ -1,11 +1,18 @@
 package com.example.facebook.shared;
 
-import com.kpjunaid.entity.*;
-import com.kpjunaid.enumeration.Role;
+import com.example.facebook.entity.*;
+import com.example.facebook.enumeration.Role;
 
 import java.util.ArrayList;
 
 public class MockResourceRepo {
+
+    // No IDs here because we deal with autowired repositories which
+    // interacts with DB which will automatically generate IDs
+
+    // difference between autowired and mocks is that autowired is a real object that has
+    // dependencies like DB while mock is an object that doesn't have its dependencies
+
     public static User getMockUserJohn() {
         return  User.builder()
                 .email("johndoe@dom.com")

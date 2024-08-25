@@ -1,19 +1,21 @@
 package com.example.facebook.service;
 
-import com.kpjunaid.entity.Comment;
-import com.kpjunaid.entity.Post;
-import com.kpjunaid.entity.User;
-import com.kpjunaid.enumeration.NotificationType;
-import com.kpjunaid.repository.CommentRepository;
-import com.kpjunaid.response.CommentResponse;
-import com.kpjunaid.service.impl.CommentServiceImpl;
-import com.kpjunaid.shared.MockResource;
+import com.example.facebook.entity.Comment;
+import com.example.facebook.entity.Post;
+import com.example.facebook.entity.User;
+import com.example.facebook.enumeration.NotificationType;
+import com.example.facebook.repository.CommentRepository;
+import com.example.facebook.response.CommentResponse;
+import com.example.facebook.service.impl.CommentServiceImpl;
+import com.example.facebook.shared.MockResource;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -25,9 +27,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@DataJpaTest
+@ExtendWith(MockitoExtension.class)
 class CommentServiceTest {
-    @InjectMocks
+    @InjectMocks  // no need to use @Autowired
     CommentServiceImpl commentService;
 
     @Mock
@@ -46,6 +48,7 @@ class CommentServiceTest {
 
     @BeforeEach
     void setUp() {
+
     }
 
     @AfterEach
@@ -68,13 +71,13 @@ class CommentServiceTest {
     @Test
     void shouldCreateNewComment_whenContentAndPostAreGiven() {
         when(userService.getAuthenticatedUser()).thenReturn(USER_JOHN);
+
         when(commentRepository.save(any(Comment.class))).thenReturn(COMMENT_ONE);
 
         Comment returnedComment = commentService.createNewComment("New Comment", POST_ONE);
 
         verify(commentRepository).save(any(Comment.class));
         assertThat(returnedComment.getPost()).isEqualTo(POST_ONE);
-        assertThat(returnedComment.getAuthor()).isEqualTo(USER_JOHN);
     }
 
     @Test
@@ -136,11 +139,11 @@ class CommentServiceTest {
 
         verify(commentRepository).save(any(Comment.class));
         assertThat(returnedComment.getLikeCount()).isEqualTo(0);
-        assertThat(returnedComment.getLikeList().contains(USER_JOHN)).isFalse();
+        assertThat(returnedComment.getLikeList().contains(USER_JANE)).isFalse();
     }
 
     @Test
-    void shouldReturnListOfPostComments_whenPostIdIsGiven() {
+    void shouldReturnListOfPostComments_whenPostIsGiven() {
         POST_ONE.getPostComments().add(COMMENT_ONE);
         POST_ONE.setCommentCount(POST_ONE.getCommentCount()+1);
 

@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
     private final EmailService emailService;
     private final JwtTokenService jwtTokenService;
     private final PasswordEncoder passwordEncoder;
-//    private final MapStructMapper mapStructMapper;
+//  private final MapStructMapper mapStructMapper;
     private final MapstructMapperUpdate mapstructMapperUpdate;
     private final Environment environment;
     private final FileNamingUtil fileNamingUtil;
@@ -105,8 +105,8 @@ public class UserServiceImpl implements UserService {
             newUser.setRole(Role.ROLE_USER.name());
             User savedUser = userRepository.save(newUser);
             UserPrincipal userPrincipal = new UserPrincipal(savedUser);
-            log.info("token generated safely");
             emailService.send(savedUser.getEmail(), AppConstants.VERIFY_EMAIL, jwtTokenService.generateToken(userPrincipal));
+            log.info("token generated safely");
             return savedUser;
         }
         return null;

@@ -1,14 +1,16 @@
 package com.example.facebook.controller;
 
-import com.kpjunaid.entity.Notification;
-import com.kpjunaid.service.NotificationService;
-import com.kpjunaid.shared.MockResource;
-import com.kpjunaid.shared.WithMockAuthUser;
+
+import com.example.facebook.entity.Notification;
+import com.example.facebook.service.NotificationService;
+import com.example.facebook.shared.MockResource;
+import com.example.facebook.shared.WithMockAuthUser;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;

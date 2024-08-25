@@ -1,9 +1,10 @@
 package com.example.facebook.repository;
 
-import com.kpjunaid.entity.Post;
-import com.kpjunaid.entity.Tag;
-import com.kpjunaid.entity.User;
-import com.kpjunaid.shared.MockResourceRepo;
+
+import com.example.facebook.entity.Post;
+import com.example.facebook.entity.Tag;
+import com.example.facebook.entity.User;
+import com.example.facebook.shared.MockResourceRepo;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -99,7 +100,7 @@ class PostRepositoryTest {
 
     @Test
     void shouldReturnListOfPosts_whenTagIsGiven() {
-        User userJohn = userRepository.findByEmail(USER_JOHN.getEmail()).get();
+       // User userJohn = userRepository.findByEmail(USER_JOHN.getEmail()).get();
         Tag targetTag = tagRepository.findAll().get(0);
 
         List<Post> foundPosts = postRepository.findPostsByPostTags(targetTag,  PageRequest.of(0, 5));

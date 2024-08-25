@@ -1,19 +1,22 @@
 package com.example.facebook.service;
 
-import com.kpjunaid.entity.Comment;
-import com.kpjunaid.entity.Notification;
-import com.kpjunaid.entity.Post;
-import com.kpjunaid.entity.User;
-import com.kpjunaid.enumeration.NotificationType;
-import com.kpjunaid.exception.NotificationNotFoundException;
-import com.kpjunaid.repository.NotificationRepository;
-import com.kpjunaid.service.impl.NotificationServiceImpl;
-import com.kpjunaid.shared.MockResource;
+
+import com.example.facebook.entity.Comment;
+import com.example.facebook.entity.Notification;
+import com.example.facebook.entity.Post;
+import com.example.facebook.entity.User;
+import com.example.facebook.enumeration.NotificationType;
+import com.example.facebook.exception.NotificationNotFoundException;
+import com.example.facebook.repository.NotificationRepository;
+import com.example.facebook.service.impl.NotificationServiceImpl;
+import com.example.facebook.shared.MockResource;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -25,7 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@DataJpaTest
+@ExtendWith(MockitoExtension.class)
 class NotificationServiceTest {
     @InjectMocks
     NotificationServiceImpl notificationService;

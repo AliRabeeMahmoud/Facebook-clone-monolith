@@ -77,13 +77,13 @@ public class UserController {
         userService.updatePassword(updatePasswordDto);
     }
 
-    @PutMapping("/account/update/profile-photo")
+    @PostMapping("/account/update/profile-photo")
     public ResponseEntity<User> updateProfilePhoto(@RequestParam("profilePhoto") MultipartFile profilePhoto) {
         User updatedUser = userService.updateProfilePhoto(profilePhoto);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 
-    @PutMapping("/account/update/cover-photo")
+    @PostMapping("/account/update/cover-photo")
     public ResponseEntity<User> updateCoverPhoto(@RequestParam("coverPhoto") MultipartFile coverPhoto) {
         User updatedUser = userService.updateCoverPhoto(coverPhoto);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);

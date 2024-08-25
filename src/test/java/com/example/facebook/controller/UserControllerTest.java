@@ -1,18 +1,19 @@
 package com.example.facebook.controller;
 
+import com.example.facebook.common.AppConstants;
+import com.example.facebook.common.UserPrincipal;
+import com.example.facebook.dto.*;
+import com.example.facebook.entity.Post;
+import com.example.facebook.entity.User;
+import com.example.facebook.response.PostResponse;
+import com.example.facebook.response.UserResponse;
+import com.example.facebook.service.PostService;
+import com.example.facebook.service.UserService;
+import com.example.facebook.service.impl.JwtTokenService;
+import com.example.facebook.shared.MockResource;
+import com.example.facebook.shared.WithMockAuthUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kpjunaid.common.AppConstants;
-import com.kpjunaid.common.UserPrincipal;
-import com.kpjunaid.dto.*;
-import com.kpjunaid.entity.Post;
-import com.kpjunaid.entity.User;
-import com.kpjunaid.response.PostResponse;
-import com.kpjunaid.response.UserResponse;
-import com.kpjunaid.service.PostService;
-import com.kpjunaid.service.UserService;
-import com.kpjunaid.service.impl.JwtTokenService;
-import com.kpjunaid.shared.MockResource;
-import com.kpjunaid.shared.WithMockAuthUser;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -135,7 +136,7 @@ class UserControllerTest {
                 .build();
         String updateUserInfoDtoJson = mapper.writeValueAsString(updateUserInfoDto);
         when(userService.updateUserInfo(any(UpdateUserInfoDto.class))).thenReturn(USER_JOHN);
-        mockMvc.perform(post(API_URL_PREFIX + "/account/update/info")
+        mockMvc.perform(put(API_URL_PREFIX + "/account/update/info")
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("utf-8")
                         .content(updateUserInfoDtoJson)
@@ -153,7 +154,7 @@ class UserControllerTest {
                 .build();
         String updateEmailDtoJson = mapper.writeValueAsString(updateEmailDto);
         when(userService.updateEmail(any(UpdateEmailDto.class))).thenReturn(USER_JOHN);
-        mockMvc.perform(post(API_URL_PREFIX + "/account/update/email")
+        mockMvc.perform(put(API_URL_PREFIX + "/account/update/email")
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("utf-8")
                         .content(updateEmailDtoJson)
@@ -171,7 +172,7 @@ class UserControllerTest {
                 .build();
         String updatePasswordDtoJson = mapper.writeValueAsString(updatePasswordDto);
         when(userService.updatePassword(any(UpdatePasswordDto.class))).thenReturn(USER_JOHN);
-        mockMvc.perform(post(API_URL_PREFIX + "/account/update/password")
+        mockMvc.perform(put(API_URL_PREFIX + "/account/update/password")
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("utf-8")
                         .content(updatePasswordDtoJson)
@@ -206,7 +207,7 @@ class UserControllerTest {
     @WithMockAuthUser
     void shouldDeleteUserAccount() throws Exception {
         doNothing().when(userService).deleteUserAccount();
-        mockMvc.perform(post(API_URL_PREFIX + "/account/delete"))
+        mockMvc.perform(delete(API_URL_PREFIX + "/account/delete"))
                 .andExpect(status().isOk());
     }
 

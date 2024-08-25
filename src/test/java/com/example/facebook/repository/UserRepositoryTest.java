@@ -1,9 +1,10 @@
 package com.example.facebook.repository;
 
-import com.kpjunaid.entity.Comment;
-import com.kpjunaid.entity.Post;
-import com.kpjunaid.entity.User;
-import com.kpjunaid.shared.MockResourceRepo;
+
+import com.example.facebook.entity.Comment;
+import com.example.facebook.entity.Post;
+import com.example.facebook.entity.User;
+import com.example.facebook.shared.MockResourceRepo;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -69,12 +70,12 @@ class UserRepositoryTest {
         User updatedJohn = userRepository.save(userJohn);
         User updatedJane = userRepository.save(userJane);
 
-        List<User> johnFollowingUsers = userRepository.findUsersByFollowingUsers(
+        List<User> johnFollowerUsers = userRepository.findUsersByFollowingUsers(
                 updatedJane, // Jane is John's following user
                 PageRequest.of(0, 5)
         );
 
-        assertThat(johnFollowingUsers.size()).isEqualTo(1);
+        assertThat(johnFollowerUsers.size()).isEqualTo(1);
     }
 
     @Test
@@ -88,12 +89,12 @@ class UserRepositoryTest {
         User updatedJane = userRepository.save(userJane);
 
 
-        List<User> janeFollowerUsers = userRepository.findUsersByFollowerUsers(
+        List<User> janeFollowingUsers = userRepository.findUsersByFollowerUsers(
                 updatedJohn, // John is Jane's follower user
                 PageRequest.of(0, 5)
         );
 
-        assertThat(janeFollowerUsers.size()).isEqualTo(1);
+        assertThat(janeFollowingUsers.size()).isEqualTo(1);
     }
 
     @Test
@@ -110,7 +111,7 @@ class UserRepositoryTest {
     }
 
     @Test
-    void shouldReturnListOfCommentLikerUsers_whenPostIsGiven() {
+    void shouldReturnListOfCommentLikerUsers_whenCommentIsGiven() {
         Comment targetComment = commentRepository.findAll().get(0);
         targetComment.getLikeList().add(USER_JOHN);
         targetComment.setLikeCount(targetComment.getLikeCount()+1);

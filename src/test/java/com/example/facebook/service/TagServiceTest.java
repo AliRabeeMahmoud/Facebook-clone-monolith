@@ -1,15 +1,18 @@
 package com.example.facebook.service;
 
-import com.kpjunaid.entity.Tag;
-import com.kpjunaid.exception.TagNotFoundException;
-import com.kpjunaid.repository.TagRepository;
-import com.kpjunaid.service.impl.TagServiceImpl;
-import com.kpjunaid.shared.MockResource;
+
+import com.example.facebook.entity.Tag;
+import com.example.facebook.exception.TagNotFoundException;
+import com.example.facebook.repository.TagRepository;
+import com.example.facebook.service.impl.TagServiceImpl;
+import com.example.facebook.shared.MockResource;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -23,7 +26,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@DataJpaTest
+@ExtendWith(MockitoExtension.class)
 class TagServiceTest {
     @InjectMocks
     TagServiceImpl tagService;

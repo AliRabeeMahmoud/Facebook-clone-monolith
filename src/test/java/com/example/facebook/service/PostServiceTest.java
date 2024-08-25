@@ -1,22 +1,25 @@
 package com.example.facebook.service;
 
-import com.kpjunaid.dto.TagDto;
-import com.kpjunaid.entity.Comment;
-import com.kpjunaid.entity.Post;
-import com.kpjunaid.entity.Tag;
-import com.kpjunaid.entity.User;
-import com.kpjunaid.enumeration.NotificationType;
-import com.kpjunaid.repository.PostRepository;
-import com.kpjunaid.response.PostResponse;
-import com.kpjunaid.service.impl.PostServiceImpl;
-import com.kpjunaid.shared.MockResource;
-import com.kpjunaid.util.FileNamingUtil;
-import com.kpjunaid.util.FileUploadUtil;
+
+import com.example.facebook.dto.TagDto;
+import com.example.facebook.entity.Comment;
+import com.example.facebook.entity.Post;
+import com.example.facebook.entity.Tag;
+import com.example.facebook.entity.User;
+import com.example.facebook.enumeration.NotificationType;
+import com.example.facebook.repository.PostRepository;
+import com.example.facebook.response.PostResponse;
+import com.example.facebook.service.impl.PostServiceImpl;
+import com.example.facebook.shared.MockResource;
+import com.example.facebook.util.FileNamingUtil;
+import com.example.facebook.util.FileUploadUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.core.env.Environment;
@@ -34,7 +37,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
-@DataJpaTest
+@ExtendWith(MockitoExtension.class)
 class PostServiceTest {
     @InjectMocks
     PostServiceImpl postService;

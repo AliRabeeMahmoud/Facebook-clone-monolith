@@ -1,14 +1,15 @@
 package com.example.facebook.controller;
 
-import com.kpjunaid.entity.Comment;
-import com.kpjunaid.entity.Post;
-import com.kpjunaid.entity.Tag;
-import com.kpjunaid.entity.User;
-import com.kpjunaid.response.PostResponse;
-import com.kpjunaid.service.PostService;
-import com.kpjunaid.service.TagService;
-import com.kpjunaid.shared.MockResource;
-import com.kpjunaid.shared.WithMockAuthUser;
+
+import com.example.facebook.entity.Comment;
+import com.example.facebook.entity.Post;
+import com.example.facebook.entity.Tag;
+import com.example.facebook.entity.User;
+import com.example.facebook.response.PostResponse;
+import com.example.facebook.service.PostService;
+import com.example.facebook.service.TagService;
+import com.example.facebook.shared.MockResource;
+import com.example.facebook.shared.WithMockAuthUser;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

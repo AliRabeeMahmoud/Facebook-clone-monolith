@@ -2,6 +2,7 @@ package com.example.facebook.service;
 
 
 import com.example.facebook.common.AppConstants;
+import com.example.facebook.common.UserPrincipal;
 import com.example.facebook.dto.*;
 import com.example.facebook.entity.Comment;
 import com.example.facebook.entity.Country;
@@ -19,10 +20,12 @@ import com.example.facebook.util.FileUploadUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mapstruct.factory.Mappers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.core.env.Environment;
 import org.springframework.data.domain.PageRequest;
@@ -42,7 +45,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
-@DataJpaTest
+@ExtendWith(MockitoExtension.class)
 class UserServiceTest {
     @InjectMocks
     UserServiceImpl userService;
@@ -77,7 +80,7 @@ class UserServiceTest {
     @Mock
     Authentication authentication;
 
-    @Spy
+    @Spy  // use real methods, and still can override them
     MapstructMapperUpdate mapstructMapperUpdate = Mappers.getMapper(MapstructMapperUpdate.class);
 
     private final User USER_JOHN = MockResource.getMockUserJohn();
@@ -167,7 +170,8 @@ class UserServiceTest {
                 .build();
 
         when(userRepository.findByEmail(USER_JOHN.getEmail())).thenThrow(UserNotFoundException.class);
-        when(emailService.buildEmailVerifyMail(anyString())).thenReturn(verifyEmailText);
+        //when(emailService.buildEmailVerifyMail(anyString())).thenReturn(verifyEmailText);
+        when(jwtTokenService.generateToken(any())).thenReturn(verifyEmailText);
         doNothing().when(emailService).send(signupDto.getEmail(), AppConstants.VERIFY_EMAIL, verifyEmailText);
         when(userRepository.save(any(User.class))).thenReturn(USER_JOHN);
 
@@ -215,7 +219,9 @@ class UserServiceTest {
         when(userRepository.findByEmail(USER_JOHN.getEmail())).thenReturn(Optional.of(USER_JOHN));
         when(userRepository.findByEmail(updateEmailDto.getEmail())).thenThrow(UserNotFoundException.class);
         when(passwordEncoder.matches(updateEmailDto.getPassword(), USER_JOHN.getPassword())).thenReturn(true);
-        when(emailService.buildEmailVerifyMail(anyString())).thenReturn(verifyEmailText);
+        //when(emailService.buildEmailVerifyMail(anyString())).thenReturn(verifyEmailText);
+        when(jwtTokenService.generateToken(any())).thenReturn(verifyEmailText);
+
         doNothing().when(emailService).send(updateEmailDto.getEmail(), AppConstants.VERIFY_EMAIL, verifyEmailText);
         when(userRepository.save(any(User.class))).thenReturn(USER_JOHN);
 
@@ -340,12 +346,12 @@ class UserServiceTest {
         String jwtToken = "jwt-token";
         String resetPasswordEmail = "Reset Password Email Text";
 
-        when(securityContext.getAuthentication()).thenReturn(authentication);
-        SecurityContextHolder.setContext(securityContext);
-        when(SecurityContextHolder.getContext().getAuthentication().getPrincipal()).thenReturn(USER_JOHN.getEmail());
+//        when(securityContext.getAuthentication()).thenReturn(authentication);
+//        SecurityContextHolder.setContext(securityContext);
+//        when(SecurityContextHolder.getContext().getAuthentication().getPrincipal()).thenReturn(USER_JOHN.getEmail());
         when(userRepository.findByEmail(USER_JOHN.getEmail())).thenReturn(Optional.of(USER_JOHN));
-        when(jwtTokenService.generateToken(any(UserPrincipal.class))).thenReturn(jwtToken);
-        when(emailService.buildResetPasswordMail(jwtToken)).thenReturn(resetPasswordEmail);
+        when(jwtTokenService.generateToken(any())).thenReturn(resetPasswordEmail);
+        //when(emailService.buildResetPasswordMail(jwtToken)).thenReturn(resetPasswordEmail);
         doNothing().when(emailService)
                 .send(USER_JOHN.getEmail(), AppConstants.RESET_PASSWORD, resetPasswordEmail);
 

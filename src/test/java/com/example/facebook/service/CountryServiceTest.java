@@ -1,14 +1,17 @@
 package com.example.facebook.service;
 
-import com.kpjunaid.entity.Country;
-import com.kpjunaid.repository.CountryRepository;
-import com.kpjunaid.service.impl.CountryServiceImpl;
-import com.kpjunaid.shared.MockResource;
+
+import com.example.facebook.entity.Country;
+import com.example.facebook.repository.CountryRepository;
+import com.example.facebook.service.impl.CountryServiceImpl;
+import com.example.facebook.shared.MockResource;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Sort;
 
@@ -18,7 +21,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-@DataJpaTest
+@ExtendWith(MockitoExtension.class)
 class CountryServiceTest {
     @InjectMocks
     CountryServiceImpl countryService;

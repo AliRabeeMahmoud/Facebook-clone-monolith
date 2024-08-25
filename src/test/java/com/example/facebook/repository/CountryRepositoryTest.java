@@ -1,7 +1,8 @@
 package com.example.facebook.repository;
 
-import com.kpjunaid.entity.Country;
-import com.kpjunaid.shared.MockResourceRepo;
+
+import com.example.facebook.entity.Country;
+import com.example.facebook.shared.MockResourceRepo;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

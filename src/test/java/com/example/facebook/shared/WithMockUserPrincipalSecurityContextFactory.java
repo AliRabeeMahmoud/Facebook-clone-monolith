@@ -1,12 +1,14 @@
 package com.example.facebook.shared;
 
-import com.kpjunaid.common.UserPrincipal;
-import com.kpjunaid.entity.User;
+
+import com.example.facebook.common.UserPrincipal;
+import com.example.facebook.entity.User;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithSecurityContextFactory;
+
 
 public class WithMockUserPrincipalSecurityContextFactory implements WithSecurityContextFactory<WithMockAuthUser> {
     @Override
