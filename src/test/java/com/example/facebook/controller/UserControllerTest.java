@@ -251,8 +251,8 @@ class UserControllerTest {
     @Test
     @WithMockAuthUser
     void shouldFollowerList_whenUserIdIsGiven() throws Exception {
-        USER_JOHN.getFollowerUsers().add(USER_JANE);
-        USER_JOHN.setFollowerCount(USER_JOHN.getFollowerCount()+1);
+//        USER_JOHN.getFollowerUsers().add(USER_JANE);
+//        USER_JOHN.setFollowerCount(USER_JOHN.getFollowerCount()+1);
 
         when(userService.getFollowerUsersPaginate(USER_JOHN.getId(), 0, 5))
                 .thenReturn(
