@@ -28,7 +28,8 @@ public class AppConstants {
     public static final String NOT_ENOUGH_PERMISSION = "You do not have enough permission to perform this action.";
     public static final String VERIFY_EMAIL = "Verify your email";
     public static final String RESET_PASSWORD = "Reset your password";
-    public static final String[] PUBLIC_URLS = {
+    public static final String[] PUBLIC_URLS = {   // any other url will need security context when testing
+                                                    // in both controller and service tests
             "/api/v1/signup",
             "/api/v1/login",
             "/api/v1/verify-email/**",
