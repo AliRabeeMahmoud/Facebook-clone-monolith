@@ -18,6 +18,8 @@ import java.util.Date;
 
 @Component
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
+
+    // when user is authenticated but not authorized to access the resource
     @Override
     public void handle(HttpServletRequest request,
                        HttpServletResponse response,

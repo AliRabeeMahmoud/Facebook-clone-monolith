@@ -16,6 +16,8 @@ import java.util.Date;
 
 @Component
 public class CustomAuthenticationEntryPoint extends Http403ForbiddenEntryPoint {
+
+    // when user is not authenticated
     @Override
     public void commence(HttpServletRequest request,
                          HttpServletResponse response,
