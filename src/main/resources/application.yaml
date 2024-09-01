@@ -41,6 +41,7 @@ upload:
 
 jwt:
   secret: d16baa1b9e8bee8cd146d5d733fdb58ad7a2d21b1fa2022e387415c03c6b5ee4
+  #got it from human-readable encryption key
 
 logging:
   file:

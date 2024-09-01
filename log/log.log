@@ -4498,3 +4498,47 @@ The last packet sent successfully to the server was ٠ milliseconds ago. The dri
 2024-08-27T11:31:22.748+02:00  WARN 11124 --- [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'entityManagerFactory': org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution [HikariPool-1 - Connection is not available, request timed out after 30015ms (total=0, active=0, idle=0, waiting=0)] [n/a]
 2024-08-27T11:31:22.750+02:00  INFO 11124 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2024-08-27T11:31:23.118+02:00  INFO 11124 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-08-27T16:13:31.718+02:00  INFO 30732 --- [facebook] [restartedMain] c.example.facebook.FacebookApplication   : Starting FacebookApplication using Java 22.0.1 with PID 30732 (C:\Users\Electronica Care\Downloads\facebook\facebook\target\classes started by Electronica Care in C:\Users\Electronica Care\Downloads\facebook\facebook)
+2024-08-27T16:13:31.722+02:00  INFO 30732 --- [facebook] [restartedMain] c.example.facebook.FacebookApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-08-27T16:13:31.793+02:00  INFO 30732 --- [facebook] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-08-27T16:13:31.793+02:00  INFO 30732 --- [facebook] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-08-27T16:13:33.485+02:00  INFO 30732 --- [facebook] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-08-27T16:13:33.619+02:00  INFO 30732 --- [facebook] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 121 ms. Found 6 JPA repository interfaces.
+2024-08-27T16:13:34.788+02:00  INFO 30732 --- [facebook] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-08-27T16:13:34.811+02:00  INFO 30732 --- [facebook] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-08-27T16:13:34.811+02:00  INFO 30732 --- [facebook] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-08-27T16:13:34.914+02:00  INFO 30732 --- [facebook] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-08-27T16:13:34.914+02:00  INFO 30732 --- [facebook] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3120 ms
+2024-08-27T16:13:34.971+02:00  INFO 30732 --- [facebook] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-08-27T16:13:35.620+02:00  INFO 30732 --- [facebook] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@a5f3dcf
+2024-08-27T16:13:35.624+02:00  INFO 30732 --- [facebook] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-08-27T16:13:35.640+02:00  INFO 30732 --- [facebook] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/face'
+2024-08-27T16:13:35.909+02:00  INFO 30732 --- [facebook] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-08-27T16:13:36.051+02:00  INFO 30732 --- [facebook] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-08-27T16:13:36.126+02:00  INFO 30732 --- [facebook] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-08-27T16:13:36.659+02:00  INFO 30732 --- [facebook] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-08-27T16:13:38.189+02:00  INFO 30732 --- [facebook] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-08-27T16:13:38.454+02:00  INFO 30732 --- [facebook] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-08-27T16:13:38.991+02:00  INFO 30732 --- [facebook] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-08-27T16:13:39.147+02:00  WARN 30732 --- [facebook] [restartedMain] o.s.aop.framework.CglibAopProxy          : Unable to proxy interface-implementing method [public final com.example.facebook.entity.User com.example.facebook.service.impl.UserServiceImpl.getAuthenticatedUser()] because it is marked as final, consider using interface-based JDK proxies instead.
+2024-08-27T16:13:39.269+02:00  INFO 30732 --- [facebook] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
+2024-08-27T16:13:39.433+02:00  WARN 30732 --- [facebook] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-08-27T16:13:40.316+02:00  INFO 30732 --- [facebook] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-08-27T16:13:40.359+02:00  INFO 30732 --- [facebook] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-08-27T16:13:40.372+02:00  INFO 30732 --- [facebook] [restartedMain] c.example.facebook.FacebookApplication   : Started FacebookApplication in 9.627 seconds (process running for 10.519)
+2024-08-27T16:14:32.786+02:00  INFO 30732 --- [facebook] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-08-27T16:14:32.787+02:00  INFO 30732 --- [facebook] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-08-27T16:14:32.789+02:00  INFO 30732 --- [facebook] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-08-27T16:14:35.309+02:00  INFO 30732 --- [facebook] [http-nio-8080-exec-9] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 1804 ms
+2024-08-27T16:16:04.519+02:00  WARN 30732 --- [facebook] [http-nio-8080-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.security.authentication.InternalAuthenticationServiceException: No user exists with this email.]
+2024-08-27T16:16:40.793+02:00  WARN 30732 --- [facebook] [http-nio-8080-exec-6] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.security.authentication.InternalAuthenticationServiceException: No user exists with this email.]
+2024-08-27T16:16:59.806+02:00  WARN 30732 --- [facebook] [http-nio-8080-exec-8] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.security.authentication.InternalAuthenticationServiceException: No user exists with this email.]
+2024-08-27T16:18:27.517+02:00  INFO 30732 --- [facebook] [http-nio-8080-exec-7] c.e.facebook.controller.UserController   : in user signup controller
+2024-08-27T16:18:27.543+02:00  INFO 30732 --- [facebook] [http-nio-8080-exec-7] c.e.f.service.impl.UserServiceImpl       : in service, creating new user
+2024-08-27T16:18:27.644+02:00  INFO 30732 --- [facebook] [http-nio-8080-exec-7] c.e.f.service.impl.UserServiceImpl       : passed the encoding safely
+2024-08-27T16:18:27.899+02:00  INFO 30732 --- [facebook] [http-nio-8080-exec-7] c.e.f.service.impl.UserServiceImpl       : token generated safely
+2024-08-27T16:18:31.190+02:00  INFO 30732 --- [facebook] [GithubLookup-1] c.e.f.service.impl.EmailServiceImpl      : email sent
+2024-08-27T16:20:31.679+02:00  INFO 30732 --- [facebook] [http-nio-8080-exec-6] c.e.facebook.controller.PostController   : json parse is safe
+2024-08-27T16:22:05.363+02:00  INFO 30732 --- [facebook] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-08-27T16:22:05.379+02:00  INFO 30732 --- [facebook] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-08-27T16:22:05.396+02:00  INFO 30732 --- [facebook] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

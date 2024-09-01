@@ -18,8 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Slf4j
 public class EmailServiceImpl implements EmailService {
+
     private final JavaMailSender mailSender;
-    private final Environment environment;
+
+//    private final Environment environment;
 
     @Override
     @Async
